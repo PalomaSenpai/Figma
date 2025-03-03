@@ -85,15 +85,38 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),*/
                     child: Image.asset(
                       "assets/Boton.png",
-                      height: 80
+                      height: 60,
+                      
                     ),
                   )
                 ],
               ),
              ),
-            )
+            ),
+            Transform.translate(
+              offset: Offset(120, 370),
+              child: Center(
+                  child: InkWell(
+                    child: Text(
+                      "Sing Up",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.deepPurple
+                      ),
+                    ),
+                    onTap: () {
+                      GlobalValues.isValidating.value = true;
+                      Future.delayed(Duration(milliseconds: 300)).then((value){
+                        GlobalValues.isValidating.value = false;
+                        Navigator.pushNamed(context, "/sin");
+                      });
+                    },
+                    ),
+                )
+              )
           ],
-
+          
         ),
       ),
     );

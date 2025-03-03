@@ -3,6 +3,7 @@ import 'package:pmsn2025/screens/ResourcesScreen.dart';
 import 'package:pmsn2025/screens/dashboard_screen.dart';
 import 'package:pmsn2025/screens/list_students_screen.dart';
 import 'package:pmsn2025/screens/login_screen.dart';
+import 'package:pmsn2025/screens/singup_screeen.dart';
 import 'package:pmsn2025/screens/splash_screen.dart';
 import 'package:pmsn2025/screens/todo_screen.dart';
 import 'package:pmsn2025/screens/welcome_screen.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
             "/log" : (context) => const LoginScreen(),
             "/res" : (context) => const ResourcesScreen(),
             "/wel" : (context) => const WelcomeScreen(),
+            "/sin" : (context) => const SingupScreen()
           },
           title: 'Material App',
           home: SplashScreen()

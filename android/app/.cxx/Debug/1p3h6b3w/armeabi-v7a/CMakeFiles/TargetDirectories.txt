@@ -1,0 +1,2 @@
+C:/Users/Aguil/Figma/android/app/.cxx/Debug/1p3h6b3w/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Aguil/Figma/android/app/.cxx/Debug/1p3h6b3w/armeabi-v7a/CMakeFiles/rebuild_cache.dir
