@@ -51,6 +51,7 @@ class _SingupScreeenState extends State<SingupScreen> {
                 leading: Icon(Icons.photo_camera),
                 title: Text("Camara"),
                 onTap: () {
+                  _CameraImage();
                   Navigator.of(context).pop();
                 },
               )
@@ -115,11 +116,16 @@ class _SingupScreeenState extends State<SingupScreen> {
                                 ),
                               ),
                             ),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Center(
                               child: Text(
-                                "Introduzca su nombre",
+                                "Nombre",
                                 style: TextStyle(
-                                  
+                                  color: Colors.pink,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
                                 ),
                                 ),
                             ),
@@ -130,6 +136,7 @@ class _SingupScreeenState extends State<SingupScreen> {
                               child: TextFormField(
                                 decoration: InputDecoration(
                                 fillColor: Colors.white,
+                                hintText: "Ingrese su nombre",
                                 filled: true,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
@@ -151,12 +158,6 @@ class _SingupScreeenState extends State<SingupScreen> {
                                   color:  Colors.blue,
                                   width: 2
                                 )
-                              ),
-                              label: Text("Nombre"),
-                              labelStyle: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 21,
-                                fontWeight: FontWeight.bold
                               ),
                               
                               ),
@@ -171,9 +172,11 @@ class _SingupScreeenState extends State<SingupScreen> {
                             Center(
                               
                               child: Text(
-                                "Introduzca su nombre",
+                                "Correo",
                                 style: TextStyle(
-                                  
+                                  color: Colors.pink,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
                                 ),
                               ),
                             ),
@@ -206,12 +209,58 @@ class _SingupScreeenState extends State<SingupScreen> {
                                   width: 2
                                 )
                               ),
-                              label: Text("Nombre"),
-                              labelStyle: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 21,
-                                fontWeight: FontWeight.bold
+                              
+                              
                               ),
+                              keyboardType: TextInputType.text,
+                              style: TextStyle(color: Colors.black,fontSize: 16,),
+                              ),
+                            ),
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            Center(
+                              
+                              child: Text(
+                                "Contraseña",
+                                style: TextStyle(
+                                  color: Colors.pink,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: SizedBox(
+                              height: 50,
+                              width: 200,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(
+                                    color: Colors.grey,
+                                    width:  1.5
+                                  )
+                                ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide(
+                                  color: Colors.grey.shade400,
+                                  width: 1.5
+                                )
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide(
+                                  color:  Colors.blue,
+                                  width: 2
+                                )
+                              ),
+                              
                               
                               ),
                               keyboardType: TextInputType.text,

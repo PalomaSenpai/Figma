@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
              ),
             ),
             Transform.translate(
-              offset: Offset(120, 370),
+              offset: Offset(120, 330),
               child: Center(
                   child: InkWell(
                     child: Text(
