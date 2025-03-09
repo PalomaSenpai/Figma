@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pmsn2025/screens/list_students_screen.dart';
 import 'package:pmsn2025/utils/global_values.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,7 +13,15 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isValidating = false;
+  bool _MantenerSesion = false;
+
+  Future<void> _SaveSession(bool value)async{
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('MantenerSesion', value);
+  }
+
   @override
+  
   Widget build(BuildContext context) {
     final txUser = TextFormField(
       decoration: InputDecoration(
@@ -76,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       GlobalValues.isValidating.value = true;
                       Future.delayed(Duration(milliseconds: 4000)).then((value){
                         GlobalValues.isValidating.value = false;
+                        _SaveSession(_MantenerSesion);
                         Navigator.pushNamed(context, "/dash");
                       });
                     },
@@ -112,6 +122,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.pushNamed(context, "/sin");
                       });
                     },
+                    ),
+                )
+              ),
+              Transform.translate(
+              offset: Offset(120, 370),
+              child: Center(
+                  child: CheckboxListTile(
+                    title: Text(
+                      "Mantener Sesion",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.black
+                      ),
+                    ),
+                    value: _MantenerSesion, 
+                    onChanged: (bool? value){
+                      setState(() {
+                        _MantenerSesion = value ?? false;
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.leading,
                     ),
                 )
               )

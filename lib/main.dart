@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             "/sin" : (context) => const SingupScreen()
           },
           title: 'Material App',
-          home: SplashScreen()
+          home: SingupScreen()
         );
       }
     );
