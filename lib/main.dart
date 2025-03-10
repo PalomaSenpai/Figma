@@ -3,6 +3,7 @@ import 'package:pmsn2025/screens/ResourcesScreen.dart';
 import 'package:pmsn2025/screens/dashboard_screen.dart';
 import 'package:pmsn2025/screens/list_students_screen.dart';
 import 'package:pmsn2025/screens/login_screen.dart';
+import 'package:pmsn2025/screens/prefers_user.dart';
 import 'package:pmsn2025/screens/singup_screeen.dart';
 import 'package:pmsn2025/screens/splash_screen.dart';
 import 'package:pmsn2025/screens/todo_screen.dart';
@@ -16,24 +17,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
+    return ValueListenableBuilder<ThemeData>(
       valueListenable: GlobalValues.themeApp,
-      builder: (context,value,child) {
-        return MaterialApp(
-          theme: value,
-          routes: {
-            "/list": (context) => const ListStudentsScreen(),
-            "/dash": (context) => const DashboardScreen(),
-            "/todo" : (context) => const TodoScreen(),
-            "/log" : (context) => const LoginScreen(),
-            "/res" : (context) => const ResourcesScreen(),
-            "/wel" : (context) => const WelcomeScreen(),
-            "/sin" : (context) => const SingupScreen()
+      builder: (context, theme, child) {
+        return ValueListenableBuilder<String>(
+          valueListenable: GlobalValues.fontFamily,
+          builder: (context, font, child) {
+            return MaterialApp(
+              theme: theme.copyWith(
+                textTheme: theme.textTheme.apply(
+                  fontFamily: font, // Aplicamos la fuente a todo el textTheme
+                ),
+              ),
+              routes: {
+                "/list": (context) => const ListStudentsScreen(),
+                "/dash": (context) => const DashboardScreen(),
+                "/todo": (context) => const TodoScreen(),
+                "/log": (context) => const LoginScreen(),
+                "/res": (context) => const ResourcesScreen(),
+                "/wel": (context) => const WelcomeScreen(),
+                "/sin": (context) => const SingupScreen(),
+                "/pre": (context) => const PrefersUser(),
+              },
+              title: 'Material App',
+              home: SplashScreen(),
+            );
           },
-          title: 'Material App',
-          home: SingupScreen()
         );
-      }
+      },
     );
   }
 }

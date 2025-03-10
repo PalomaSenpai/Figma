@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
               bottom: 50,
               child: Container(
                 padding: const EdgeInsets.all(10),
-                height: 250,
+                height: 280,
                 width: MediaQuery.of(context).size.width*.9,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -104,47 +104,48 @@ class _LoginScreenState extends State<LoginScreen> {
              ),
             ),
             Transform.translate(
-              offset: Offset(120, 370),
+              offset: Offset(120, 340),
               child: Center(
-                  child: InkWell(
-                    child: Text(
-                      "Sing Up",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.deepPurple
-                      ),
-                    ),
-                    onTap: () {
-                      GlobalValues.isValidating.value = true;
-                      Future.delayed(Duration(milliseconds: 300)).then((value){
-                        GlobalValues.isValidating.value = false;
-                        Navigator.pushNamed(context, "/sin");
-                      });
-                    },
-                    ),
+                      child: InkWell(
+                        child: Text(
+                          "Sing Up",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.deepPurple
+                          ),
+                        ),
+                        onTap: () {
+                          GlobalValues.isValidating.value = true;
+                          Future.delayed(Duration(milliseconds: 300)).then((value){
+                            GlobalValues.isValidating.value = false;
+                            Navigator.pushNamed(context, "/sin");
+                          });
+                        },
+                        ),
                 )
               ),
               Transform.translate(
-              offset: Offset(120, 370),
+              offset: Offset(0, 300),
               child: Center(
-                  child: CheckboxListTile(
-                    title: Text(
-                      "Mantener Sesion",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.black
-                      ),
-                    ),
-                    value: _MantenerSesion, 
-                    onChanged: (bool? value){
-                      setState(() {
-                        _MantenerSesion = value ?? false;
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,
-                    ),
+                  child:  CheckboxListTile(
+                        title: Text(
+                          "Mantener Sesion",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.black
+                          ),
+                        ),
+                        value: _MantenerSesion, 
+                        onChanged: (bool? value){
+                          setState(() {
+                            _MantenerSesion = value ?? false;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
+                        ),
+                    
                 )
               )
           ],

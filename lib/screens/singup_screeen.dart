@@ -13,6 +13,35 @@ class SingupScreen extends StatefulWidget {
 class _SingupScreeenState extends State<SingupScreen> {
   File? _image;
   final ImagePicker _picker = ImagePicker();
+   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passswordController = TextEditingController();
+
+  String? _validarEmail(String? value){
+    if (value == null || value.isEmpty) {
+      return'El correo electrónico es obligatorio';
+    }if(!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)){
+      return 'Introduce un correo electrónico válido';
+    }
+  }
+
+  String? _validarCampo(String? value, String fieldName){
+    if (value==null||value.isEmpty) {
+      return 'El $fieldName es obligatorio';
+    }
+    return null;
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      // Si el formulario es válido, procede con el registro
+      print('Nombre: ${_nameController.text}');
+      print('Correo: ${_emailController.text}');
+      print('Contraseña: ${_passswordController.text}');
+      // Aquí puedes agregar la lógica para registrar al usuario
+    }
+  }
 
   Future<void> _selecImageFromGallery() async{
     final XFile? selecFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -95,135 +124,183 @@ class _SingupScreeenState extends State<SingupScreen> {
                     width: 1
                   )
                 ),
-                child: Stack(
-                  children: [
-                    Transform.translate(
-                      offset: Offset(0, 0),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: MediaQuery.paddingOf(context),
-                              child: GestureDetector(
-                                onTap: _ShowDialog,
-                                child: CircleAvatar(
-                                  radius: 50,
-                                  backgroundColor: Colors.grey.shade300,
-                                  backgroundImage: _image != null ?FileImage(_image!) :null,
-                                  child: _image == null
-                                        ? Icon(Icons.camera_alt, size: 40, color: Colors.grey) : null,
+                child: Form(
+                  key: _formKey,
+                  child: Stack(
+                    children: [
+                      Transform.translate(
+                        offset: Offset(0, 0),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: MediaQuery.paddingOf(context),
+                                child: GestureDetector(
+                                  onTap: _ShowDialog,
+                                  child: CircleAvatar(
+                                    radius: 50,
+                                    backgroundColor: Colors.grey.shade300,
+                                    backgroundImage: _image != null ?FileImage(_image!) :null,
+                                    child: _image == null
+                                          ? Icon(Icons.camera_alt, size: 40, color: Colors.grey) : null,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Center(
-                              child: Text(
-                                "Introduzca su nombre",
-                                style: TextStyle(
-                                  
-                                ),
-                                ),
-                            ),
-                            Center(
-                              child: SizedBox(
-                              height: 50,
-                              width: 200,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                fillColor: Colors.white,
-                                filled: true,
-                                border: OutlineInputBorder(
+                              Center(
+                                child: Text(
+                                  "Nombre",
+                                  style: TextStyle(
+                                    
+                                  ),
+                                  ),
+                              ),
+                              Center(
+                                child: SizedBox(
+                                height: 50,
+                                width: 200,
+                                child: TextFormField(
+                                  controller: _nameController,
+                                  decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width:  1.5
+                                    )
+                                  ),
+                                enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                   borderSide: BorderSide(
-                                    color: Colors.grey,
-                                    width:  1.5
+                                    color: Colors.grey.shade400,
+                                    width: 1.5
                                   )
                                 ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                  color: Colors.grey.shade400,
-                                  width: 1.5
-                                )
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                  color:  Colors.blue,
-                                  width: 2
-                                )
-                              ),
-                              label: Text("Nombre"),
-                              labelStyle: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 21,
-                                fontWeight: FontWeight.bold
-                              ),
-                              
-                              ),
-                              keyboardType: TextInputType.text,
-                              style: TextStyle(color: Colors.black,fontSize: 16,),
-                              ),
-                            ),
-                            ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            Center(
-                              
-                              child: Text(
-                                "Introduzca su nombre",
-                                style: TextStyle(
-                                  
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: SizedBox(
-                              height: 50,
-                              width: 200,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                fillColor: Colors.white,
-                                filled: true,
-                                border: OutlineInputBorder(
+                                focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                   borderSide: BorderSide(
-                                    color: Colors.grey,
-                                    width:  1.5
+                                    color:  Colors.blue,
+                                    width: 2
                                   )
                                 ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                  color: Colors.grey.shade400,
-                                  width: 1.5
-                                )
+                                
+                                ),
+                                keyboardType: TextInputType.text,
+                                style: TextStyle(color: Colors.black,fontSize: 16,),
+                                validator: (value) => _validarCampo(value, 'nombre'),
+                                ),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                  color:  Colors.blue,
-                                  width: 2
-                                )
                               ),
-                              label: Text("Nombre"),
-                              labelStyle: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 21,
-                                fontWeight: FontWeight.bold
+                              SizedBox(
+                                height: 40,
                               ),
-                              
+                              Center(
+                                
+                                child: Text(
+                                  "Correo",
+                                  style: TextStyle(
+                                    
+                                  ),
+                                ),
                               ),
-                              keyboardType: TextInputType.text,
-                              style: TextStyle(color: Colors.black,fontSize: 16,),
+                              Center(
+                                child: SizedBox(
+                                height: 50,
+                                width: 200,
+                                child: TextFormField(
+                                  controller: _emailController,
+                                  decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width:  1.5
+                                    )
+                                  ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(
+                                    color: Colors.grey.shade400,
+                                    width: 1.5
+                                  )
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(
+                                    color:  Colors.blue,
+                                    width: 2
+                                  )
+                                ),
+                                
+                                ),
+                                keyboardType: TextInputType.text,
+                                style: TextStyle(color: Colors.black,fontSize: 16,),
+                                validator: _validarEmail,
+                                ),
                               ),
-                            ),
-                            )
-                          ],
+                              ),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Center(
+                                
+                                child: Text(
+                                  "Contraseña",
+                                  style: TextStyle(
+                                    
+                                  ),
+                                ),
+                              ),
+                              Center(
+                                child: SizedBox(
+                                height: 50,
+                                width: 200,
+                                child: TextFormField(
+                                  controller: _passswordController,
+                                  decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width:  1.5
+                                    )
+                                  ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(
+                                    color: Colors.grey.shade400,
+                                    width: 1.5
+                                  )
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(
+                                    color:  Colors.blue,
+                                    width: 2
+                                  )
+                                ),
+                                ),
+                                keyboardType: TextInputType.text,
+                                style: TextStyle(color: Colors.black,fontSize: 16,),
+                                validator: (value) => _validarCampo(value, 'contraseña'),
+                                obscureText: true,
+                                
+                                ),
+                              ),
+                              ),
+                              SizedBox(height: 20,),
+                              ElevatedButton(onPressed: _submitForm, child: Text("Registrarse"),)
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
